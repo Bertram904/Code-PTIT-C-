@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int s (int n)
+{
+	int s1 = 0;;
+	while (n > 0)
+	{
+		s1 += n % 10;
+		n/=10;
+	}
+	return s1;
+}
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		int n;
+		cin >> n;
+		int m = n;
+		int res = m;
+		int sum1 = 0, sum2 = 0;
+		vector <int> v;
+		while (n > 0)
+		{
+			sum1 += n % 10;
+			n/=10;
+		}
+		for (int i = 2; i <= sqrt(m); i++)
+		{
+			while  (m % i == 0)
+			{
+			    v.push_back(i);
+				sum2 += s(i);
+				m/=i;
+			}
+		}
+		if (m != 1)
+		{
+		    v.push_back(n);
+			sum2 += s(m);
+		}
+		if (sum1 == sum2 && v.size() > 1) cout << "YES";
+		else cout << "NO";
+		cout << endl;
+	}
+}
