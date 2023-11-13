@@ -1,0 +1,101 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+// ham nguyen to
+int nt (int n)
+{
+	for (int i = 2; i <= sqrt(n); i++)
+	{
+		if (n % i == 0) return 0;
+	}
+	return n > 1;
+}
+
+// ham kiem tra thuan nghich
+// cach 1:
+int tn (int n)
+{
+	int m = n;
+	int s = 0;
+	while (n > 0)
+	{
+		s = s * 10 + n % 10;
+		n/=10;
+	}
+	if (s == m) return 1;
+	else return 0;
+}
+// cach 2: su dung chuoi
+ int tn1 (string s)
+ {
+ 	string t = s;
+ 	reverse(s.begin(), s.end()); // ham lat nguoc xau
+ 	return t == s;
+ }
+ 
+ // sang so nguyen to su dung vector
+ // chi sang duoc khi n <= 1e6
+ 
+ vector <int> v(1e6 + 1, 1);
+ void sangNT ()
+ {
+ 	v[0] = v[1] = 0;
+ 	for (int i = 2; i <= 1000; i++)
+ 	{
+ 		if (v[i])
+ 		{
+ 			for (int j = i * i; j <= 1e6; j += i)
+ 			{
+ 				v[j] = 0;
+			 }
+		}
+	 }
+ }
+ 
+ // UCLN, BCNN
+
+ll ucLN (ll a, ll b)
+{
+	if (b == 0) return a;
+	return ucLN(b, a % b);
+}
+ll bcNN (ll a, ll b)
+{
+	return a * b/ ucLN(a, b);
+}
+
+// FIBONACCI
+
+ll f[93];
+void fiboNACCI ()
+{
+	f[0] = 0;
+	f[1] = 1;
+	for (int i = 2; i <= 92; i++)
+	{
+		f[i] = f[i - 1] + f[i - 2];
+	}
+}
+
+// ham sap xep don gian
+
+void sapxep (int a[], int n)
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[j] > a[i])
+			{
+				if (a[j] > a[i])
+				{
+					int tmp = a[j];
+					a[j] = a[i];
+					a[i] = tmp;
+				}
+			}
+		}
+	}
+}
