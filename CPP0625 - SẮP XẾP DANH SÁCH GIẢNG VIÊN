@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int increase = 1;
+
+string Standardized (string temp)
+{
+	string res = "";
+	stringstream ss(temp);
+	string token;
+	while (ss >> token)
+	{
+		res += toupper(token[0]);
+	}
+	return res;
+}
+
+string Last_name (string Name)
+{
+	string Qing = "";
+	stringstream ss(Name);
+	while (ss >> Name)
+	{
+		Qing = Name;
+	}
+	return Qing;
+}
+
+class GiangVien{
+	public:
+		string id, name, clas;
+	friend istream& operator >> (istream &in, GiangVien &a)
+	{
+		scanf ("\n");
+		string s = to_string(increase++);
+		while (s.size() < 2)
+		{
+			s = "0" + s;
+		}
+		a.id = "GV" + s;
+		getline(cin, a.name);
+		getline(cin, a.clas);
+		return in;
+	}
+	friend ostream& operator << (ostream &out, GiangVien a)
+	{
+		cout << a.id << " " << a.name << " " << Standardized(a.clas) << endl;
+		return out;
+	}
+};
+
+bool cmp (GiangVien a, GiangVien b)
+{
+	if (Last_name(a.name) == Last_name(b.name)) return a.id < b.id;
+	else return Last_name(a.name) < Last_name(b.name);
+}
+
+void Sort (GiangVien a[], int Number)
+{
+	sort (a, a + Number, cmp);
+}
+
+int main(){
+	int number;
+	cin >> number;
+	GiangVien a[number];
+	for (int i = 0; i < number; i++)
+	{
+		cin >> a[i];
+	}
+	Sort (a, number);
+	for (int i = 0; i < number; i++)
+	{
+		cout << a[i];
+	}
+	return 0;
+}
